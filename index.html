@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Juicechan</title>
+		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="content.css" />
+		<link rel="stylesheet" href="navbar.css" />
+	</head>
+	<body>
+		<header class="header">
+			<h1>Juice</h1>
+		</header>
+
+		<section class="video_container">
+			<video id="videoPlayer" loop playsinline src="./media/background.mp4"></video>
+			<div class="overlay"></div>
+			<button id="playButton" class="play-btn">▶ Play</button>
+
+			<section class="content_container">
+				<h1 class="album_title">JuiceCloud</h1>
+				<h3 class="subtitle">Lebron's Edition</h3>
+				<div class="available">Available Now</div>
+			</section>
+		</section>
+		<script>
+			const video = document.getElementById('videoPlayer');
+			const playButton = document.getElementById('playButton');
+		  
+			// Click to play/pause
+			playButton.addEventListener('click', () => {
+			  if (video.paused) {
+				video.play();
+				playButton.textContent = '⏸ Pause';
+			  } else {
+				video.pause();
+				playButton.textContent = '▶ Play';
+			  }
+			});
+		  
+			// Hide button when video starts playing
+			video.addEventListener('play', () => {
+			  playButton.style.display = 'none';
+			});
+		  
+			// Show button when video stops
+			video.addEventListener('pause', () => {
+			  playButton.style.display = 'block';
+			  playButton.textContent = '▶ Play';
+			});
+		  </script>
+		  
+		  <style>
+			.play-btn {
+			  position: absolute;
+			  top: 50%;
+			  left: 50%;
+			  transform: translate(-50%, -50%);
+			  z-index: 999;
+			  background: rgba(0, 0, 0, 0.7);
+			  border: 2px solid white;
+			  color: white;
+			  padding: 12px 24px;
+			  border-radius: 30px;
+			  cursor: pointer;
+			  font-size: 24px;
+			  transition: all 0.3s ease;
+			}
+		  
+			.play-btn:hover {
+			  background: rgba(255, 255, 255, 0.2);
+			  transform: translate(-50%, -50%) scale(1.1);
+			}
+		  </style>
+	</body>
+</html>
