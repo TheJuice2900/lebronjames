@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<title>Juicechan</title>
 		<link rel="stylesheet" href="style.css" />
 		<link rel="stylesheet" href="content.css" />
@@ -19,59 +19,71 @@
 			<button id="playButton" class="play-btn">▶ Play</button>
 
 			<section class="content_container">
+				<div class="title-overlay"></div>
 				<h1 class="album_title">JuiceCloud</h1>
 				<h3 class="subtitle">Lebron's Edition</h3>
 				<div class="available">Available Now</div>
 			</section>
 		</section>
+
 		<script>
+			// Video Controls
 			const video = document.getElementById('videoPlayer');
 			const playButton = document.getElementById('playButton');
-		  
+
 			// Click to play/pause
 			playButton.addEventListener('click', () => {
-			  if (video.paused) {
-				video.play();
-				playButton.textContent = '⏸ Pause';
-			  } else {
-				video.pause();
-				playButton.textContent = '▶ Play';
-			  }
+				if (video.paused) {
+					video.play();
+					playButton.textContent = '⏸ Pause';
+				} else {
+					video.pause();
+					playButton.textContent = '▶ Play';
+				}
 			});
-		  
+
 			// Hide button when video starts playing
 			video.addEventListener('play', () => {
-			  playButton.style.display = 'none';
+				playButton.style.display = 'none';
 			});
-		  
+
 			// Show button when video stops
 			video.addEventListener('pause', () => {
-			  playButton.style.display = 'block';
-			  playButton.textContent = '▶ Play';
+				playButton.style.display = 'block';
+				playButton.textContent = '▶ Play';
 			});
-		  </script>
-		  
-		  <style>
+
+			// Hover Overlay Effect - Add this new section
+			document.querySelector('.content_container').addEventListener('mousemove', function(e) {
+				const rect = this.getBoundingClientRect();
+				const x = e.clientX - rect.left;
+				const y = e.clientY - rect.top;
+				this.style.setProperty('--x', `${x}px`);
+				this.style.setProperty('--y', `${y}px`);
+			});
+		</script>
+
+		<style>
 			.play-btn {
-			  position: absolute;
-			  top: 50%;
-			  left: 50%;
-			  transform: translate(-50%, -50%);
-			  z-index: 999;
-			  background: rgba(0, 0, 0, 0.7);
-			  border: 2px solid white;
-			  color: white;
-			  padding: 12px 24px;
-			  border-radius: 30px;
-			  cursor: pointer;
-			  font-size: 24px;
-			  transition: all 0.3s ease;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				z-index: 999;
+				background: rgba(0, 0, 0, 0.7);
+				border: 2px solid white;
+				color: white;
+				padding: 12px 24px;
+				border-radius: 30px;
+				cursor: pointer;
+				font-size: 24px;
+				transition: all 0.3s ease;
 			}
-		  
+
 			.play-btn:hover {
-			  background: rgba(255, 255, 255, 0.2);
-			  transform: translate(-50%, -50%) scale(1.1);
+				background: rgba(255, 255, 255, 0.2);
+				transform: translate(-50%, -50%) scale(1.1);
 			}
-		  </style>
+		</style>
 	</body>
 </html>
